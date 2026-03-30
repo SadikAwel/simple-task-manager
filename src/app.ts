@@ -4,7 +4,7 @@ const app  = express();
 
 app.get("", (req, res) => {
   res.send("<h1>for server file</h1>")
-  console.error("this work correctly: ")
+  console.log("this work correctly: ")
   return;
 })
 
