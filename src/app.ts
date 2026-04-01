@@ -1,6 +1,8 @@
 import express from "express";
+import router from "../src/routes/task.route.js"
 const app  = express();
 
+app.use("/api", router) 
 
 app.get("", (req, res) => {
   res.send("<h1>for server file</h1>")
