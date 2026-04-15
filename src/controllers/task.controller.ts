@@ -1,6 +1,7 @@
 import { TaskService } from "../services/task.service.js"
 import { taskSchema } from "../models/task.schema.js"
 import type {Request, Response} from "express"
+import {UnauthorizedError} from "../error/mainError.js"
 
 const taskService = new TaskService();
 
@@ -18,4 +19,11 @@ export class Controller{
         res.send(taskService.listTask())
         return
     }
+
+    admin = (req: Request, res: Response) => {
+        console.log("am here !!!!")
+        throw new UnauthorizedError("Unauthorized Person Can't access the Domain");
+        
+    }
+    
 }

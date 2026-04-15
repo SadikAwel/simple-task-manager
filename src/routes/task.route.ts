@@ -6,6 +6,7 @@ const controller = new Controller();
 
 router.post("/git", controller.createTask);
 router.get("/git", controller.listTask)
+router.get("/admin", controller.admin)
 
 
 export default router;

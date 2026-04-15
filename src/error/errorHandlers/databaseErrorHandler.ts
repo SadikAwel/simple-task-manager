@@ -1,5 +1,6 @@
 import baseErrorHandler from "../base.errorHandler.js"
 import {DatabaseError} from "../mainError.js"
+import type { Request, Response } from "express";
 
 export class DatabaseErrorHandler extends baseErrorHandler{
     protected canHandle(err: Error):boolean{
@@ -8,12 +9,14 @@ export class DatabaseErrorHandler extends baseErrorHandler{
         
     }
 
-    protected process(err: Error): void {
+    protected process(err: Error, req: Request, res: Response): void {
         if (err instanceof DatabaseError){
 
-        console.log(`Error: this error type is : ${err.type} \n
-             statuscode is: ${err.statusCode} \n 
-             time is : ${err.time}`)
+        res.send(`<strong>Error:</strong><br> 
+             error type--=> ${err.type} </br>
+             Message----=> ${err.message} </br>
+             statuscode-=> ${err.statusCode} </br>
+             time--------=> ${err.time}`)
     }
 }}
 

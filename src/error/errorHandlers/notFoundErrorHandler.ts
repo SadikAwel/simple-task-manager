@@ -1,18 +1,21 @@
-import baseErrorHandler from "../base.errorHandler.js"
+import BaseErrorHandler from "../base.errorHandler.js"
 import {NotFoundError} from "../mainError.js"
+import type { Request, Response, NextFunction } from "express";
 
-export class NotFoundErrorHandler extends baseErrorHandler{
+export class NotFoundErrorHandler extends BaseErrorHandler{
     protected canHandle(err: Error):boolean{
         if (err instanceof NotFoundError)return true;
         return false;
         
     }
 
-    protected process(err: Error): void {
+    protected process(err: Error, req: Request, res: Response): void {
         if (err instanceof NotFoundError){
 
-        console.log(`Error:\n error type is : ${err.type} \n
-             statuscode is: ${err.statusCode} \n 
-             time is : ${err.time}`)
+        res.send(`<strong>Error:</strong><br> 
+             error type--=> ${err.type} </br>
+             Message----=> ${err.message} </br>
+             statuscode-=> ${err.statusCode} </br>
+             time--------=> ${err.time}`)
     }
 }}

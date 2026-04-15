@@ -17,7 +17,7 @@ export default abstract class BaseErrorHandler implements ErrorHandler{
         next: NextFunction
     ):boolean{
         if (this.canHandle(err)){
-            this.process(err);
+            this.process(err, req, res);
             return true;
         }
 
@@ -29,5 +29,5 @@ export default abstract class BaseErrorHandler implements ErrorHandler{
         return false
     }
     protected abstract canHandle(err: Error):boolean;
-    protected abstract process(err: Error): void;
+    protected abstract process(err: Error, req: Request, res: Response): void;
 }

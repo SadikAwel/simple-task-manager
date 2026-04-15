@@ -1,5 +1,7 @@
 import express from "express";
 import router from "../src/routes/task.route.js"
+
+import {errorMiddleware} from "./middlewares/errorMiddleware.js"
 const app  = express();
 
 app.use("/api", router) 
@@ -9,6 +11,8 @@ app.get("", (req, res) => {
   console.log("this work correctly: ")
   return;
 })
+
+app.use(errorMiddleware);
 
 
 const port:number  = 3000
