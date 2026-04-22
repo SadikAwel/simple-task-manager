@@ -1,7 +1,7 @@
 import express from "express";
 import router from "../src/routes/task.route.js"
 
-import {errorMiddleware} from "./middlewares/errorMiddleware.js"
+import {errorMiddleware} from "./config/container.js"
 const app  = express();
 
 app.use("/api", router) 

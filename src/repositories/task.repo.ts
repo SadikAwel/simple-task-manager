@@ -1,12 +1,13 @@
 import type { Task } from "../models/task.models.js"
 import {NotFoundError} from "../error/mainError.js"
+import type {repoInterface} from "./repo.interface.ts"
 
 //for more
 
 const task: Task[] = [];
 //{title:"abebe", id: "asede", complete:false}
 
-export class TaskRepository{
+export class TaskRepository implements repoInterface{
     createTask(data: Task): Task | undefined {
         task.push(data);
         return data;

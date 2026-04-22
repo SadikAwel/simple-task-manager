@@ -1,8 +1,8 @@
 import{ Router } from "express"
-import { Controller } from "../controllers/task.controller.js"
+import { container } from "../config/container.js"
 
 const router = Router();
-const controller = new Controller();
+const controller = container.taskController;
 
 router.post("/git", controller.createTask);
 router.get("/git", controller.listTask)

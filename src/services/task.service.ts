@@ -1,11 +1,15 @@
 import type {taskSchemaTod} from "../models/task.schema.ts"
-import { TaskRepository }  from "../repositories/task.repo.js"
 import type {Task} from "../models/task.models.js"
-const repository = new TaskRepository();
+import type {repoInterface} from "../repositories/repo.interface.js"
 
 export class TaskService{
+    repository: repoInterface ;
+    constructor(repository:repoInterface ){
+        this.repository = repository;
+    }
+
     createTask(data: taskSchemaTod): void{
-        repository.createTask({
+        this.repository.createTask({
             ...data,
             complete : false,
         }
@@ -14,10 +18,8 @@ export class TaskService{
 
     }
 
-    listTask(): string{
-        const value : string = JSON.stringify(repository.listTask());
-        console.log(`this from TaskServie class listTask method : ${value}`)
-        return value;
+    listTask(): Task{
+                return this.repository.listTask();
     }
 }
 

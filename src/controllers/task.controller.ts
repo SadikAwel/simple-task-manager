@@ -3,20 +3,27 @@ import { taskSchema } from "../models/task.schema.js"
 import type {Request, Response} from "express"
 import {UnauthorizedError} from "../error/mainError.js"
 
-const taskService = new TaskService();
 
 export class Controller{
+    taskService: TaskService;
+    constructor(taskService: TaskService){
+        this.taskService = taskService;
+    }
     createTask(req: Request, res: Response): void{
         const parsed = taskSchema.safeParse(req.body);
         if(!parsed.success){
             res.status(400).send("Bad Request !!")
             return
         }
-        taskService.createTask(parsed.data)
+        this.taskService.createTask(parsed.data)
     }
 
     listTask(req: Request, res: Response){
-        res.send(taskService.listTask())
+        const val = this.taskService.listTask();
+        const value: string = JSON.stringify(val);
+        console.log(`this from TaskServie class listTask method : ${value}`)
+
+        res.send()
         return
     }
 

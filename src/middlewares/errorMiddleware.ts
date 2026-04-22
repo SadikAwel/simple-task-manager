@@ -1,21 +1,8 @@
 import type {Request, Response, NextFunction, ErrorRequestHandler} from "express"
 
-import {DatabaseErrorHandler} from "../error/errorHandlers/databaseErrorHandler.js"
-import {NotFoundErrorHandler} from "../error/errorHandlers/notFoundErrorHandler.js"
-import {TimeOutErrorHandler} from "../error/errorHandlers/timeOutErrorHandler.js"
-import {UnauthorizedErrorHandler} from "../error/errorHandlers/unauthorizedErrorHandler.js"
+import {dataBaseErrorHandler} from "../config/errorConfig.js"
 
-function errorHandlerMiddleware():ErrorRequestHandler{
-
-    const dataBaseErrorHandler = new DatabaseErrorHandler();
-    const notFoundErrorHandler = new NotFoundErrorHandler();
-    const timeOutErrorHandler = new TimeOutErrorHandler();
-    const unauthorizedErrorHandler = new UnauthorizedErrorHandler();
-
-    dataBaseErrorHandler
-    .setNext(notFoundErrorHandler)
-    .setNext(timeOutErrorHandler)
-    .setNext(unauthorizedErrorHandler);
+export function errorHandlerMiddleware():ErrorRequestHandler{
 
 
     return (err: Error, req: Request, res: Response,next: NextFunction) => {
@@ -23,4 +10,3 @@ function errorHandlerMiddleware():ErrorRequestHandler{
     }
 }
 
-export const errorMiddleware  = errorHandlerMiddleware();
