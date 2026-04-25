@@ -1,21 +1,23 @@
 import type { Task } from "../models/task.models.js"
-import {NotFoundError} from "../error/mainError.js"
 import type {repoInterface} from "./repo.interface.ts"
+import {logger} from "../utils/logger.js"
+import type { fdatasync } from "node:fs";
 
 //for more
 
-const task: Task[] = [];
+const task: Task[] = [{title:"abebe", id: "asede", complete:false}];
 //{title:"abebe", id: "asede", complete:false}
 
 export class TaskRepository implements repoInterface{
-    createTask(data: Task): Task | undefined {
+    createTask(data: Task): Task {
+        logger.info("Persisting task to repository")
         task.push(data);
+        logger.info("Task persisted successfully")
         return data;
     }
-    listTask(): Task{
-        if (!task[0]){
-            throw new NotFoundError("=> There is noting Record in Database. ")
-        }
-            return {title:"abebe", id: "asede", complete:false};
+    listTask(): Task[]{
+
+            logger.info("Querying repository for all task");
+            return  task;
     }
 }

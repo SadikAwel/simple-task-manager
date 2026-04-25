@@ -1,5 +1,3 @@
-import { object } from "zod";
-
 export class AppError extends Error {
     statusCode: number;
     constructor(message: string, status: number){

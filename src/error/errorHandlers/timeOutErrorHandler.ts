@@ -12,8 +12,10 @@ export class TimeOutErrorHandler extends baseErrorHandler{
     protected process(err: Error, req: Request, res: Response): void {
         if (err instanceof TimeOutError){
 
-        res.send(`Error:\n error type is : ${err.type} \n
-             statuscode is: ${err.statusCode} \n 
-             time is : ${err.time}`)
+        res.send(`<strong>Error:</strong><br> 
+             error type--=> ${err.type} </br>
+             Message----=> ${err.message} </br>
+             statuscode-=> ${err.statusCode} </br>
+             time--------=> ${err.time}`)
     }
 }}
