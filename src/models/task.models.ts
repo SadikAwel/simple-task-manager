@@ -1,8 +1,12 @@
-export type taskPriority = "high" | "low"| "medium" | undefined ;
+import { date } from "zod";
+
+export type TaskPriority = "high" | "low"| "medium"  ;
 
 export interface Task {
     id: string,
     title: string,
-    complete: boolean,
-    priority?: taskPriority
+    completed: boolean,
+    priority?: TaskPriority,
+    createdAt: Date ,
+    updatedAt: Date
 }

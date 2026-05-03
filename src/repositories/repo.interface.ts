@@ -1,5 +1,6 @@
-import type {Task} from "../models/task.models.js"
+import type {Task, Prisma} from "@prisma/client"
 export interface repoInterface{
-    createTask(data: Omit<Task, "id">): Task;
-    listTask(): Task[];
+    createTask(data: Prisma.TaskCreateInput): Promise<Task>;
+    listTask(): Promise<Task[]>;
+    listByName(name: string):Promise<Task[]>;
 }

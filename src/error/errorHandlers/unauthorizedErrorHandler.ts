@@ -11,7 +11,7 @@ export class UnauthorizedErrorHandler extends baseErrorHandler{
     }
 
     protected process(err: Error, req: Request, res: Response): void {
-        if (err instanceof UnauthorizedError){
+        if (err instanceof (UnauthorizedError || err)){
 
         res.send(`<strong>Error:</strong><br> 
              error type--=> ${err.type} </br>
