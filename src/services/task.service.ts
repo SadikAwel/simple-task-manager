@@ -3,6 +3,9 @@ import type {Task} from "@prisma/client"
 import {TaskPriority} from "@prisma/client"
 import type {repoInterface} from "../repositories/repo.interface.js"
 import {logger} from "../utils/logger.js"
+import type { UUID } from "node:crypto"
+import { id } from "zod/v4/locales"
+
 
 export class TaskService{
     repository: repoInterface ;
@@ -39,6 +42,25 @@ export class TaskService{
         return value;
     }
 
+    async deleteById(id:string):Promise<Task|Object>{
+        logger.info(`Deleting User ${id}`);
+        setTimeout( ()=>{return {}}, 200)
+        const value = await this.repository.deleteById(id)
+        if(!value){
+            console.log(value, "the value you want is not found.")
+            
+        }
+       
+        return {VALUEE:value,VALUES: await this.listTask()}
+    }
+
+
+    async updateById(task: taskSchemaTod):Promise<Task|void>{
+        logger.info(`from service uspdating`);
+        const value = await this.repository.updateById(task)
+        console.log("Pass..")
+        return value;
+    }
 
 }
 
