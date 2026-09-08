@@ -5,6 +5,9 @@ import type {repoInterface} from "../repositories/repo.interface.js"
 import {logger} from "../utils/logger.js"
 import type { UUID } from "node:crypto"
 import { id } from "zod/v4/locales"
+import { NotFoundError, DatabaseError, TimeOutError} from "../error/mainError.js"
+import { dataBaseErrorHandler } from "../config/errorConfig.js"
+
 
 
 export class TaskService{
@@ -42,23 +45,27 @@ export class TaskService{
         return value;
     }
 
-    async deleteById(id:string):Promise<Task|Object>{
-        logger.info(`Deleting User ${id}`);
-        setTimeout( ()=>{return {}}, 200)
-        const value = await this.repository.deleteById(id)
-        if(!value){
-            console.log(value, "the value you want is not found.")
+    async deleteById(id:string):Promise<Task>{
+        logger.info(`Deleting Task ${id}`);
+        try{
+
+            const value = await this.repository.deleteById(id)
+            return value
+        }catch(error){
+            throw new NotFoundError("the task is not found");
             
         }
+        {
+        }
        
-        return {VALUEE:value,VALUES: await this.listTask()}
+        
     }
 
 
-    async updateById(task: taskSchemaTod):Promise<Task|void>{
+    async updateById(id: string, task: taskSchemaTod):Promise<Task>{
         logger.info(`from service uspdating`);
-        const value = await this.repository.updateById(task)
-        console.log("Pass..")
+        const value = await this.repository.updateById(id, task)
+        logger.info("Pass..")
         return value;
     }
 

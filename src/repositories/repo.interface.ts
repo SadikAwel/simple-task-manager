@@ -7,5 +7,5 @@ export interface repoInterface{
     listTask(): Promise<Task[]>;
     listByName(name: string):Promise<Task[]>;
     deleteById(id: string):Promise<Task>;
-    updateById(task: taskSchemaTod):Promise<Task|void>;
+    updateById(id: string, task: taskSchemaTod):Promise<Task>;
 }

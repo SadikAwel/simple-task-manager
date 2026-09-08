@@ -1,4 +1,5 @@
-import {uuid, z} from "zod";
+import {toUpperCase, uuid, z} from "zod";
+import { _toUpperCase } from "zod/v4/core";
 
 
 export const taskSchema = z.object({
@@ -15,3 +16,5 @@ export const taskIdSchema = z.object({
 })
 
 export type taskSchemaTod = z.infer<typeof taskSchema>;
+export type taskId = z.infer<typeof taskIdSchema>
+export type taskTitle = z.infer<typeof taskTitleSchema>
