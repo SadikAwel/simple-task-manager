@@ -1,2 +1,3 @@
 # simple-task-manager
-This task manager it is simple but the structure is industry-standard 
+first trial
+This task manager it is simple but the structure is industry-standard without authentication and authorization 
